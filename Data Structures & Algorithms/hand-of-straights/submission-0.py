@@ -1,0 +1,19 @@
+class Solution:
+    def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        if len(hand) % groupSize:
+            return False
+        
+        count = defaultdict(int)
+        for card in hand:
+            count[card] += 1
+        
+        hand.sort()
+        for num in hand:
+            if count[num]:
+                for i in range(num, num + groupSize):
+                    if not count[i]:
+                        return False
+                    count[i] -= 1
+        return True
+
+        
